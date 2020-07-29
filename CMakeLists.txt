@@ -2,7 +2,7 @@
 cmake_minimum_required(VERSION 3.18)
 
 #options
-option(USE_VCPKG "Use VCPKG" OFF)
+option(USE_VCPKG "Use VCPKG" ON)
 option(PASS_VERSION "Pass the version from cmake file to source code" ON)
 option(USE_CUSTOM_DIR "Use custom dir" ON)
 option(BUILD_STATIC "Build static or dinamic library" ON)
@@ -50,12 +50,12 @@ add_library(project_warnings INTERFACE)
 
 
 if (${CMAKE_CXX_COMPILER_ID} STREQUAL "Clang" AND "x${CMAKE_CXX_SIMULATE_ID}" STREQUAL "xMSVC" OR ${CMAKE_CXX_COMPILER_ID} STREQUAL "Clang" )
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Xclang -std=c++20")
+    #set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Xclang -std=c++20")
     target_compile_features(project_options INTERFACE cxx_std_20)
 endif()
 
 if(MSVC)
-  target_compile_options(project_warnings INTERFACE /W4 /WX "/permissive-")
+  #target_compile_options(project_warnings INTERFACE /W4 /WX "/permissive-")
 else()
   target_compile_options(project_warnings
                          INTERFACE -Wall
@@ -116,11 +116,12 @@ endif()
 
 #If you use vcpkg,USE_VCPKG must be ON
 if(USE_VCPKG)
-    set(vcpkgRoot "SET THIS")
+    set(vcpkgRoot "D:/repositories/VS/vcpkg")
     if(NOT EXISTS ${vcpkgRoot})
         message(FATAL_ERROR "Please set vcpkg root for exemple: C:/vcpkg or C:/vcpkg-master")
     else()
         set(CMAKE_TOOLCHAIN_FILE "${vcpkgRoot}/scripts/buildsystems/vcpkg.cmake")
+
     endif()
 
 endif()
@@ -139,9 +140,8 @@ if(USE_CUSTOM_DIR)
 endif()
 
 # Find packages go here.
+find_package(OpenCV CONFIG REQUIRED)
 
-
-#
 # files
 add_subdirectory(src)
 if(CREATE_RUNTIME_FILE)
@@ -164,6 +164,9 @@ if(ENABLE_TESTING)
 endif()
 
 #vcpkg linking
+target_link_libraries(Artist PUBLIC opencv_ml opencv_dnn opencv_core opencv_flann)
+target_link_libraries(Application PUBLIC opencv_ml opencv_dnn opencv_core opencv_flann)
+target_link_libraries(${projectName} PUBLIC opencv_ml opencv_dnn opencv_core opencv_flann)
 
 #packaging
 set(CPACK_PACKAGE_NAME ${projectName})

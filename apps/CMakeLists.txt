@@ -46,7 +46,9 @@ if(NOT BUILD_STATIC)
     file(GLOB MY_DLL_FILES ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/*.dll)
     install(DIRECTORY ${CMAKE_RUNTIME_OUTPUT_DIRECTORY} DESTINATION . COMPONENT DLLS FILES_MATCHING PATTERN "*.dll")
 endif()
-
+if(USE_VCPKG)
+    set_target_properties(${APP_NAME} PROPERTIES VS_GLOBAL_VcpkgEnabled true)
+endif()
 
 #clang-format usage
 

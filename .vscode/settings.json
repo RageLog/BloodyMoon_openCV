@@ -2,6 +2,11 @@
     "cmake.configureArgs": [
         "-GNinja"
     ],
+    "cmake.configureSettings": {
+
+        "CMAKE_TOOLCHAIN_FILE" : "D:/repositories/VS/vcpkg/scripts/buildsystems/vcpkg.cmake",
+        "VCPKG_BUILD": "ON",
+    },
     "files.associations": {
         "future": "cpp",
         "algorithm": "cpp",
@@ -98,7 +103,8 @@
         "cinttypes": "cpp",
         "*.inc": "cpp",
         "*.ipp": "cpp",
-        "hash_map": "cpp"
+        "hash_map": "cpp",
+        "strstream": "cpp"
     },
     "C_Cpp.errorSquiggles": "Enabled",
     "editor.tokenColorCustomizations": {
@@ -127,5 +133,6 @@
         {
             "pattern": "tests/tests_output/*/*.exe"
         }
-    ]
+    ],
+    //"C_Cpp.intelliSenseEngine": "Tag Parser"
 }
