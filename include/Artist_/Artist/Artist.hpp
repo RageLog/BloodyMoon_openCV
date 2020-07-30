@@ -71,13 +71,5 @@
      const Canvas getCanvas() const;
      cv::Mat& getImage();
    };
-   
-   
-
-   
-   
-   
-  
-   
  }
 
