@@ -46,7 +46,6 @@ void Application::run(void)
           color =cft::iterateFractal(n_i+(n_j*1i),255);
           if ((sqrt(pow((m_pic->getCanvas().centerPoint.first-i),2)+pow(m_pic->getCanvas().centerPoint.second-j,2))) <= (9000))
           {
-            // ?(((static_cast<double>(i*i)/(n_i*n_i))+(static_cast<double>(j*j)/(n_i*n_i)))/(2))*255
             if(color<5) m_pic->getPixel(i,j) = cv::Vec4b(0,0,color*5,255);
             else if(color<10) m_pic->getPixel(i,j) = cv::Vec4b(0,0,color*5,255);
             else if(color<15) m_pic->getPixel(i,j) = cv::Vec4b(0,0,color*5,255);
