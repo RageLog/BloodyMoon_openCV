@@ -50,7 +50,7 @@ add_library(project_warnings INTERFACE)
 
 
 if (${CMAKE_CXX_COMPILER_ID} STREQUAL "Clang" AND "x${CMAKE_CXX_SIMULATE_ID}" STREQUAL "xMSVC" OR ${CMAKE_CXX_COMPILER_ID} STREQUAL "Clang" )
-    #set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Xclang -std=c++20")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Xclang -std=c++20")
     target_compile_features(project_options INTERFACE cxx_std_20)
 endif()
 

@@ -13,7 +13,7 @@ namespace cft
     {
         m_threads.push_back(std::make_unique<std::thread>([&,this,task](){
             m_cv.notify_one(); 
-            task(std::move(m_Picture));
+            task(m_Picture);
             std::unique_lock<std::mutex> m_unique_lock(m_mutex);
             this->areThreadsDone[std::this_thread::get_id()] = true;
             m_unique_lock.unlock();
